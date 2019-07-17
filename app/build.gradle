@@ -31,8 +31,6 @@ dependencies {
     ext.coroutines = "1.3.0-M1"
     // RecyclerView
     ext.recyclerview = "1.0.0"
-    // Apache Common IO
-    ext.acio = "2.6"
 
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation"org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
@@ -49,6 +47,4 @@ dependencies {
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines"
     // RecyclerView
     implementation "androidx.recyclerview:recyclerview:$recyclerview"
-    // Apache Common IO
-    implementation group: 'commons-io', name: 'commons-io', version: "$acio"
 }
