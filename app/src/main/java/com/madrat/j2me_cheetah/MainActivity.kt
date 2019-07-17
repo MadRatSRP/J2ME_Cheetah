@@ -4,9 +4,12 @@ import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.RecyclerView
+import com.madrat.j2me_cheetah.adapter.CheatsAdapter
 import com.madrat.j2me_cheetah.model.Cheat
 import com.squareup.moshi.JsonReader
 import com.squareup.moshi.Moshi
+import kotlinx.android.synthetic.main.activity_main.*
 import okio.Okio
 
 class MainActivity : AppCompatActivity() {
@@ -14,7 +17,19 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        returnListOfCheats(applicationContext)
+        val listOfCheats = returnListOfCheats(applicationContext)
+
+        /*val adapter = CheatsAdapter()
+        recyclerView.adapter = adapter
+        recyclerView.linearManager()
+
+        adapter.updateListOfCheats(listOfCheats)
+        recyclerView.adapter = adapter*/
+
+        //Log.d("", listOfCheats[1].toString())
+        listOfCheats.forEach {
+            Log.d("", it.toString())
+        }
     }
     fun openFileAndConvertItToTheListOfCheats(context: Context, pathToNLCheats: String,
                                               fileId: Int): List<Cheat> {
