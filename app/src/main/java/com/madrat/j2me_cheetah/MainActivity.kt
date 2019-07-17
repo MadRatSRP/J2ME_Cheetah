@@ -1,142 +1,56 @@
 package com.madrat.j2me_cheetah
 
-import android.database.SQLException
 import android.os.Bundle
-import android.telecom.Connection
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
-import com.madrat.j2me_cheetah.`object`.cheats
-import java.sql.DriverManager
-import java.sql.ResultSet
-import java.sql.Statement
+import com.madrat.j2me_cheetah.model.Cheat
+import com.squareup.moshi.JsonAdapter
+import com.squareup.moshi.JsonReader
+import com.squareup.moshi.Moshi
+import kotlinx.android.synthetic.main.activity_main.*
+import okio.BufferedSource
+import okio.Okio
+import org.apache.commons.io.IOUtils
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        /*val db = RoomAsset.databaseBuilder(applicationContext,
-            AppDatabase::class.java, "NL_Cheats.db").build()
-        val cheats = db.cheatsDao().getAll()
-        print(cheats.size)*/
+       /* val fileToString = openFile("nl_cheats_#1.json")
+        val listOfCheats = fileToString?.let { convertStringToArrayOfCheats(it) }
 
-        /*val ma = MyApplication()
+        Log.d("", "${listOfCheats?.size}")*/
 
-        val db = ma.getDatabase()
-        val cheatsDao = db?.cheatsDao()
-        val cheats = cheatsDao?.getAll()*/
+        val array = openFileAndConvertItToTheListOfCheats("nl_cheats_#1.json")
+        Log.d("", "${array.size}")
+    }
+    fun openFileAndConvertItToTheListOfCheats(filePath: String): List<Cheat> {
+        val moshi = Moshi.Builder().build()
+        val cheatsParser = CheatsParser(moshi)
 
+        val assetManager = applicationContext.assets//.openFd("PreparedFilesWithCheats/NL_Cheats/")
+        val inputStream = assetManager.open("PreparedFilesWithCheats/NL_Cheats/$filePath")
 
-        /*print("Размер базы данных: " + cheats?.size)
-        print("Размер базы данных: " + cheats?.size)
-        print("Размер базы данных: " + cheats?.size)
-        print("Размер базы данных: " + cheats?.size)
-        print("Размер базы данных: " + cheats?.size)
-        print("Размер базы данных: " + cheats?.size)
-        print("Размер базы данных: " + cheats?.size)*/
-
-        //textView.text = cheats?.size.toString()
-
-        getDataFromDatabase()
+        val bufferedSource = Okio.buffer(Okio.source(inputStream))
+        val listOfCheats = cheatsParser.parse(JsonReader.of(bufferedSource))
+        return listOfCheats
     }
 
-    fun getDataFromDatabase() {
-        println("getDataFromDatabase()")
-
-        var conn: Connection? = null
-        var stmt: Statement? = null
-        try {
-            Class.forName("org.sqlite.JDBC")
-            conn = DriverManager.getConnection("jdbc:sqlite:${cheats.basePath}${cheats.dbPath}")
-
-            println("Database was opened")
-
-            stmt = conn.createStatement()
-
-            val rs: ResultSet = stmt.executeQuery("SELECT * FROM cheats")
-            while (rs.next()) {
-                print(rs.getString("title"))
-                /*print("HAHA" + rs.getString("title"))
-                print("HAHA" + rs.getString("description"))*/
-            }
-
-            /*updatedListOfPairs.forEach {pair ->
-                val title = pair.first
-                val description = pair.second
-
-                val insertQuery = cheats.returnInsertQueryWithParameters(title, description)
-                stmt.execute(insertQuery)
-            }
-
-            val rs: ResultSet = stmt.executeQuery(cheats.SQL_SELECT_ALL)
-            while (rs.next()) {
-                print("\n" + rs.getString(cheats.COLUMN_NAME_TITLE))
-                print("\n" + rs.getString(cheats.COLUMN_NAME_DESCRIPTION))
-            }*/
-        }
-        catch (ex: ClassNotFoundException) {
-            ex.printStackTrace()
-        }
-        catch (ex: SQLException) {
-            ex.printStackTrace()
-        }
-        finally {
-            try {
-                stmt?.close()
-                conn?.close()
-                println("\nTable cheats successfully updated")
-            }
-            catch (e: SQLException) { e.printStackTrace() }
-        }
+    /*fun openFile(filePath: String): String? {
+        val assetManager = applicationContext.assets//.openFd("PreparedFilesWithCheats/NL_Cheats/")
+        val inputStream = assetManager.open("PreparedFilesWithCheats/NL_Cheats/$filePath")
+        val totalString = IOUtils.toString(inputStream)
+        return totalString
     }
+    fun convertStringToArrayOfCheats(string: String): ArrayList<Cheat> {
+        val listOfCheats = ArrayList<Cheat>()
+        val moshi = Moshi.Builder().build()
+        val jsonAdapter: JsonAdapter<Cheat> = moshi.adapter(Cheat::class.java)
 
-    /*fun loadDataFromDatabase() {
 
-        val c: Connection?
-
-        val stmt: Statement?
-
-        try {
-            Class.forName("org.sqlite.JDBC")
-
-            c = DriverManager.getConnection("jdbc:sqlite:"+ cheats.basePath + cheats.dbPath)
-
-            println("Database Opened...\n")
-
-            stmt = c.createStatement()
-
-            val title = "1"
-            val description = "2"
-
-            val SQL_INSERT_CHEATS = "INSERT INTO cheats " +
-                    "(title, description) " +
-                    "VALUES ('$title', '$description')"
-
-            stmt.execute(SQL_INSERT_CHEATS)
-
-            /*stmt.execute(cheats.SQL_DELETE_CHEATS)
-
-            stmt.executeUpdate(cheats.SQL_CREATE_CHEATS)*/
-
-            //stmt.execute(SQL_INSERT_CHEATS)
-
-            val rs: ResultSet = stmt.executeQuery("SELECT * FROM cheats")
-            while (rs.next()) {
-                Log.d("", rs.getString("title"))
-                /*print("HAHA" + rs.getString("title"))
-                print("HAHA" + rs.getString("description"))*/
-            }
-
-            stmt.close()
-
-            c.close()
-
-        } catch (e: Exception) {
-
-            System.err.println(e.javaClass.name + ": " + e.message)
-
-            exitProcess(0)
-        }
-        println("Table Product Created Successfully!!!")
+        val cheat = jsonAdapter.fromJson(string)
+        cheat?.let { it1 -> listOfCheats.add(it1) }
+        return listOfCheats
     }*/
 }
