@@ -19,7 +19,15 @@ allprojects {
     repositories {
         google()
         jcenter()
-        
+
+        mavenLocal()
+        mavenCentral()
+
+        maven {
+            url "https://mvnrepository.com/artifact/com.h2database/h2"
+        }
+
+        maven { url "https://jitpack.io" }
     }
 }
 
