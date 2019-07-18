@@ -4,7 +4,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.madrat.j2me_cheetah.R
-import com.madrat.j2me_cheetah.inflate
+import com.madrat.j2me_cheetah.util.inflate
 import com.madrat.j2me_cheetah.model.Cheat
 import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.list_cheats.*

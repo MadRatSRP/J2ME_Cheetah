@@ -1,4 +1,4 @@
-package com.madrat.j2me_cheetah
+package com.madrat.j2me_cheetah.util
 
 import android.view.LayoutInflater
 import android.view.View

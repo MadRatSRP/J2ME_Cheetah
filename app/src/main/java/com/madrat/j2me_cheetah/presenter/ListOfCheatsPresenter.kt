@@ -1,34 +1,23 @@
-package com.madrat.j2me_cheetah
+package com.madrat.j2me_cheetah.presenter
 
 import android.content.Context
-import android.os.Bundle
 import android.util.Log
-import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.RecyclerView
-import com.madrat.j2me_cheetah.adapter.CheatsAdapter
+import com.madrat.j2me_cheetah.R
+import com.madrat.j2me_cheetah.interfaces.ListOfCheatsMVP
 import com.madrat.j2me_cheetah.model.Cheat
+import com.madrat.j2me_cheetah.util.CheatsParser
 import com.squareup.moshi.JsonReader
 import com.squareup.moshi.Moshi
-import kotlinx.android.synthetic.main.activity_main.*
 import okio.Okio
 
-class MainActivity : AppCompatActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-
-        val listOfCheats = returnListOfCheats(applicationContext)
-
-        val adapter = CheatsAdapter()
-        recyclerView.adapter = adapter
-        recyclerView.linearManager()
-
-        adapter.updateListOfCheats(listOfCheats)
-        recyclerView.adapter = adapter
+class ListOfCheatsPresenter(private val locView: ListOfCheatsMVP.View)
+    : ListOfCheatsMVP.Presenter {
+    override fun showListOfCheats(listOfCheats: ArrayList<Cheat>) {
+        locView.updateListOfCheats(listOfCheats)
     }
-    fun openFileAndConvertItToTheListOfCheats(context: Context, pathToNLCheats: String,
-                                              fileId: Int): List<Cheat> {
-        val cheatName = getString(R.string.pathToNLCheatsCheat, fileId)
+    override fun openFileAndConvertItToTheListOfCheats(context: Context, pathToNLCheats: String,
+                                                       fileId: Int): List<Cheat> {
+        val cheatName = context.getString(R.string.pathToNLCheatsCheat, fileId)
 
         val moshi = Moshi.Builder().build()
         val cheatsParser = CheatsParser(moshi)
@@ -37,14 +26,13 @@ class MainActivity : AppCompatActivity() {
         val inputStream = assetManager.open(pathToNLCheats + cheatName)
 
         val bufferedSource = Okio.buffer(Okio.source(inputStream))
-        val listOfCheats = cheatsParser.parse(JsonReader.of(bufferedSource))
-        return listOfCheats
+        return cheatsParser.parse(JsonReader.of(bufferedSource))
     }
-    fun returnListOfCheats(context: Context): ArrayList<Cheat> {
+    override fun updateAndShowListOfCheats(context: Context) {
         val listOfCheats = ArrayList<Cheat>()
 
-        val pathToFolderWithPreparedData = getString(R.string.pathToFolderWithPreparedData)
-        val pathToFolderWithNLCheats = getString(R.string.pathToFolderWithNLCheats)
+        val pathToFolderWithPreparedData = context.getString(R.string.pathToFolderWithPreparedData)
+        val pathToFolderWithNLCheats = context.getString(R.string.pathToFolderWithNLCheats)
         val pathToNLCheats = pathToFolderWithPreparedData + pathToFolderWithNLCheats
 
         val firstListOfCheats
@@ -68,6 +56,7 @@ class MainActivity : AppCompatActivity() {
         listOfCheats.addAll(sixthListOfCheats)
 
         Log.d("", "${listOfCheats.size}")
-        return listOfCheats
+
+        showListOfCheats(listOfCheats)
     }
 }

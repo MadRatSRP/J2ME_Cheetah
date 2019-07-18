@@ -1,4 +1,4 @@
-package com.madrat.j2me_cheetah
+package com.madrat.j2me_cheetah.util
 
 import com.madrat.j2me_cheetah.model.Cheat
 import com.squareup.moshi.JsonAdapter
