@@ -29,7 +29,7 @@ class CheatsAdapter
     inner class CheatsHolder internal constructor(override val containerView: View)
         : RecyclerView.ViewHolder(containerView), LayoutContainer {
         fun bind(cheat: Cheat) {
-            cheatTitle.text = cheat.title
+            cheatTitle.text = cheat.cheatTitle
         }
     }
 }

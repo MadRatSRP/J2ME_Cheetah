@@ -19,17 +19,12 @@ class MainActivity : AppCompatActivity() {
 
         val listOfCheats = returnListOfCheats(applicationContext)
 
-        /*val adapter = CheatsAdapter()
+        val adapter = CheatsAdapter()
         recyclerView.adapter = adapter
         recyclerView.linearManager()
 
         adapter.updateListOfCheats(listOfCheats)
-        recyclerView.adapter = adapter*/
-
-        //Log.d("", listOfCheats[1].toString())
-        listOfCheats.forEach {
-            Log.d("", it.toString())
-        }
+        recyclerView.adapter = adapter
     }
     fun openFileAndConvertItToTheListOfCheats(context: Context, pathToNLCheats: String,
                                               fileId: Int): List<Cheat> {
