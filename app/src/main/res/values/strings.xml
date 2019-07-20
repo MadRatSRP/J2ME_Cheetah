@@ -3,6 +3,7 @@
     <string name="pathToFolderWithPreparedData">PreparedFilesWithCheats/</string>
     <string name="pathToFolderWithNLCheats">NL_Cheats/</string>
     <string name="pathToNLCheatsCheat">nl_cheats_#%d.json</string>
-
-    <string name="locTitle">ListOfCheats</string>
+    // SearchOfCheats
+    <string name="socTitle">Поиск читов</string>
+    <string name="socCheatHint">Введите название игры:</string>
 </resources>

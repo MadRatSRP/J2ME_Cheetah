@@ -3,17 +3,37 @@ package com.madrat.j2me_cheetah.presenter
 import android.content.Context
 import android.util.Log
 import com.madrat.j2me_cheetah.R
-import com.madrat.j2me_cheetah.interfaces.ListOfCheatsMVP
+import com.madrat.j2me_cheetah.interfaces.SearchOfCheatsMVP
 import com.madrat.j2me_cheetah.model.Cheat
+import com.madrat.j2me_cheetah.model.SpannableCheat
 import com.madrat.j2me_cheetah.util.CheatsParser
 import com.squareup.moshi.JsonReader
 import com.squareup.moshi.Moshi
 import okio.Okio
 
-class ListOfCheatsPresenter(private val locView: ListOfCheatsMVP.View)
-    : ListOfCheatsMVP.Presenter {
-    override fun showListOfCheats(listOfCheats: ArrayList<Cheat>) {
-        locView.updateListOfCheats(listOfCheats)
+class SearchOfCheatsPresenter(private val locView: SearchOfCheatsMVP.View)
+    : SearchOfCheatsMVP.Presenter {
+    private val spannableListOfCheats = ArrayList<SpannableCheat>()
+
+    override fun convertAndSaveSpannableListOfCheats(listOfCheats: ArrayList<Cheat>) {
+        val spannableListOfCheats = ArrayList<SpannableCheat>()
+        listOfCheats.forEach {
+            spannableListOfCheats.add(SpannableCheat(
+                it.cheatTitle, it.cheatDescription))
+        }
+        this.spannableListOfCheats.addAll(spannableListOfCheats)
+    }
+    override fun showListOfCheats() {
+        locView.updateListOfCheats(this.spannableListOfCheats)
+    }
+    override fun showListOfCheats(updatedListOfCheats: ArrayList<SpannableCheat>) {
+        locView.updateListOfCheats(updatedListOfCheats)
+    }
+    override fun searchForCheatAndUpdateListOfCheats(cheatName: String) {
+        val updatedListOfCheats = spannableListOfCheats.filter {
+            it.title.contains(cheatName, true)
+        } as ArrayList<SpannableCheat>
+        showListOfCheats(updatedListOfCheats)
     }
     override fun openFileAndConvertItToTheListOfCheats(context: Context, pathToNLCheats: String,
                                                        fileId: Int): List<Cheat> {
@@ -57,6 +77,7 @@ class ListOfCheatsPresenter(private val locView: ListOfCheatsMVP.View)
 
         Log.d("", "${listOfCheats.size}")
 
-        showListOfCheats(listOfCheats)
+        convertAndSaveSpannableListOfCheats(listOfCheats)
+        showListOfCheats()
     }
 }
