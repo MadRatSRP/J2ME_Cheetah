@@ -6,19 +6,18 @@
     android:layout_height="wrap_content">
     <LinearLayout
         android:id="@+id/cheatLinearLayout"
-        android:layout_marginStart="8dp"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_marginTop="15dp"
-        android:layout_marginBottom="8dp"
         android:orientation="horizontal"
+        android:layout_marginStart="@dimen/cheatLinearLayoutMarginStart"
+        android:layout_marginBottom="@dimen/standardMarginAndPadding"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/cheatLinearLayoutHeight"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent">
         <TextView
             android:id="@+id/cheatTitle"
-            android:textSize="17sp"
+            android:textSize="@dimen/listTitleAndCheatDescription"
             android:gravity="center_vertical"
             android:layout_width="match_parent"
             android:layout_height="match_parent"

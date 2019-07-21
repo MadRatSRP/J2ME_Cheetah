@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="listTitleAndCheatDescription">17sp</dimen>
+    <dimen name="cheatTitle">22sp</dimen>
+
+    <dimen name="standardMarginAndPadding">20dp</dimen>
+    <dimen name="constraintValue">0dp</dimen>
+    <dimen name="cheatLinearLayoutMarginStart">8dp</dimen>
+    <dimen name="cheatLinearLayoutHeight">40dp</dimen>
+</resources>

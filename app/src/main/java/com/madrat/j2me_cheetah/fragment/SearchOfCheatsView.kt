@@ -73,7 +73,6 @@ class SearchOfCheatsView
         } else {
             socPresenter?.searchForCheatAndUpdateListOfCheats(cheatName.toString())
         }
-        adapter?.notifyDataSetChanged()
     }
     private fun highlight() {
         val cheatName = socSearchBar.text

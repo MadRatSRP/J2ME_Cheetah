@@ -17,6 +17,7 @@
     <fragment
         android:id="@+id/browseCheat"
         android:name="com.madrat.j2me_cheetah.fragment.BrowseCheatView"
+        android:label="@string/bcTitle"
         tools:layout="@layout/view_browse_cheat" >
         <argument
             android:name="title"

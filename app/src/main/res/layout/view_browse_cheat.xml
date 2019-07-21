@@ -6,38 +6,27 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".fragment.BrowseCheatView">
-    <LinearLayout
-        android:id="@+id/bcLinearLayout"
-        android:orientation="vertical"
+    <TextView
+        android:id="@+id/bcTitle"
+        android:textSize="@dimen/cheatTitle"
+        android:gravity="center"
+        android:textColor="@color/BLACK"
+        android:layout_margin="@dimen/standardMarginAndPadding"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-        <TextView
-            android:id="@+id/bcTitleHint"
-            android:gravity="center"
-            android:textSize="20sp"
-            android:text="@string/bcTitleHint"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-        <TextView
-            android:id="@+id/bcTitle"
-            android:gravity="center"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-        <TextView
-            android:id="@+id/bcDescriptionHint"
-            android:gravity="center"
-            android:textSize="20sp"
-            android:text="@string/bcDescriptionHint"
-            android:layout_marginTop="25dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-        <TextView
-            android:id="@+id/bcDescription"
-            android:gravity="center"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-    </LinearLayout>
+        app:layout_constraintTop_toTopOf="parent"/>
+    <TextView
+        android:id="@+id/bcDescription"
+        android:textColor="@color/BLACK"
+        android:background="@drawable/frame"
+        android:textSize="@dimen/listTitleAndCheatDescription"
+        android:padding="@dimen/standardMarginAndPadding"
+        android:layout_margin="@dimen/standardMarginAndPadding"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/bcTitle"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
