@@ -3,11 +3,26 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_screens"
-    app:startDestination="@id/listOfCheats">
+    app:startDestination="@id/searchOfCheats">
 
     <fragment
-        android:id="@+id/listOfCheats"
+        android:id="@+id/searchOfCheats"
         android:name="com.madrat.j2me_cheetah.fragment.SearchOfCheatsView"
         android:label="@string/socTitle"
-        tools:layout="@layout/view_search_of_cheats" />
+        tools:layout="@layout/view_search_of_cheats" >
+        <action
+            android:id="@+id/action_searchOfCheats_to_browseCheat"
+            app:destination="@id/browseCheat" />
+    </fragment>
+    <fragment
+        android:id="@+id/browseCheat"
+        android:name="com.madrat.j2me_cheetah.fragment.BrowseCheatView"
+        tools:layout="@layout/view_browse_cheat" >
+        <argument
+            android:name="title"
+            app:argType="string" />
+        <argument
+            android:name="description"
+            app:argType="string" />
+    </fragment>
 </navigation>

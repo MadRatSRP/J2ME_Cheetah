@@ -2,8 +2,10 @@ package com.madrat.j2me_cheetah.adapter
 
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.madrat.j2me_cheetah.R
+import com.madrat.j2me_cheetah.fragment.SearchOfCheatsViewDirections
 import com.madrat.j2me_cheetah.util.inflate
 import com.madrat.j2me_cheetah.model.Cheat
 import com.madrat.j2me_cheetah.model.SpannableCheat
@@ -32,7 +34,15 @@ class SpannableCheatsAdapter
     inner class SpannableCheatsHolder internal constructor(override val containerView: View)
         : RecyclerView.ViewHolder(containerView), LayoutContainer {
         fun bind(spannableCheat: SpannableCheat) {
-            cheatTitle.text = spannableCheat.title
+            val title: String = spannableCheat.title.toString()
+            cheatTitle.text = title
+
+            cheatToCheatBrowsing.setOnClickListener {
+                val action = SearchOfCheatsViewDirections.actionSearchOfCheatsToBrowseCheat(
+                    title, spannableCheat.description
+                )
+                containerView.findNavController().navigate(action)
+            }
         }
     }
 }
