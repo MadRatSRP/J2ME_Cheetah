@@ -1,20 +1,30 @@
 package com.madrat.j2me_cheetah.fragment
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatActivity
+import android.widget.ImageButton
 import androidx.fragment.app.Fragment
 import com.madrat.j2me_cheetah.R
-import com.madrat.j2me_cheetah.util.addFragment
-import com.madrat.j2me_cheetah.util.removeFragment
+import com.madrat.j2me_cheetah.activity.AppActivity
 import kotlinx.android.synthetic.main.view_browse_cheat.view.*
 
 class BrowseCheatView: Fragment() {
+    private var bcElementsLayout: View? = null
+
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        //(activity as AppCompatActivity).addFragment(BrowseCheatButtons.instance, R.id.additionalElementContainer)
+        /*bcElementsLayout = View.inflate(context, R.layout.elements_bc, null)
+
+        val bcShare: ImageButton? = bcElementsLayout?.findViewById(R.id.bcShare)
+
+        bcElementsLayout?.let { (activity as AppActivity).addCustomViewForToolbar(it) }
+
+        bcShare?.setOnClickListener {
+            Log.d("", "HAHAHAHHA")
+        }*/
     }
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -25,9 +35,10 @@ class BrowseCheatView: Fragment() {
         view.bcDescription.text = cheatArguments?.description
         return view
     }
-
     override fun onDestroyView() {
+        //bcElementsLayout?.let { (activity as AppActivity).removeCustomViewFromToolbar(it) }
+
+        bcElementsLayout = null
         super.onDestroyView()
-        //(activity as AppCompatActivity).removeFragment(BrowseCheatButtons.instance)
     }
 }

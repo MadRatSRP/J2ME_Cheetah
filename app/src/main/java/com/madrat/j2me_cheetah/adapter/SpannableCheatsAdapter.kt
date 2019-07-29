@@ -37,7 +37,7 @@ class SpannableCheatsAdapter
             val title: String = spannableCheat.title.toString()
             cheatTitle.text = title
 
-            cheatToCheatBrowsing.setOnClickListener {
+            cheatToCheatBrowsing.setOnClickListener {view->
                 val action = SearchOfCheatsViewDirections.actionSearchOfCheatsToBrowseCheat(
                     title, spannableCheat.description
                 )

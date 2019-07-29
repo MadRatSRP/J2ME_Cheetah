@@ -27,13 +27,3 @@ fun RecyclerView.linearManager() {
     this.layoutManager = LinearLayoutManager(context)
 }
 //Fragment extensions
-fun AppCompatActivity.addFragment(fragment: Fragment, id: Int) {
-    this.supportFragmentManager?.beginTransaction()
-        ?.replace(id, fragment)
-        ?.commit()
-}
-fun AppCompatActivity.removeFragment(fragment: Fragment) {
-    this.supportFragmentManager?.beginTransaction()
-        ?.remove(fragment)
-        ?.commit()
-}
