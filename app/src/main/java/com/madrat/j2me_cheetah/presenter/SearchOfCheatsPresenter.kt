@@ -9,6 +9,7 @@ import com.madrat.j2me_cheetah.model.SpannableCheat
 import com.madrat.j2me_cheetah.util.CheatsParser
 import com.squareup.moshi.JsonReader
 import com.squareup.moshi.Moshi
+import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import okio.Okio
 
 class SearchOfCheatsPresenter(private val locView: SearchOfCheatsMVP.View)
@@ -19,7 +20,7 @@ class SearchOfCheatsPresenter(private val locView: SearchOfCheatsMVP.View)
         val spannableListOfCheats = ArrayList<SpannableCheat>()
         listOfCheats.forEach {
             spannableListOfCheats.add(SpannableCheat(
-                it.cheatTitle, it.cheatDescription))
+                it.title, it.description))
         }
         this.spannableListOfCheats.addAll(spannableListOfCheats)
     }
@@ -39,7 +40,9 @@ class SearchOfCheatsPresenter(private val locView: SearchOfCheatsMVP.View)
                                                        fileId: Int): List<Cheat> {
         val cheatName = context.getString(R.string.pathToNLCheatsCheat, fileId)
 
-        val moshi = Moshi.Builder().build()
+        val moshi = Moshi.Builder()
+            .add(KotlinJsonAdapterFactory())
+            .build()
         val cheatsParser = CheatsParser(moshi)
 
         val assetManager = context.assets

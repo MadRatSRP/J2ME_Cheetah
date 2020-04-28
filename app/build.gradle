@@ -2,7 +2,8 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
-// Navigation Architecture Component
+
+// Navigation
 apply plugin: "androidx.navigation.safeargs.kotlin"
 
 androidExtensions {
@@ -10,11 +11,11 @@ androidExtensions {
 }
 
 android {
-    compileSdkVersion 28
+    compileSdkVersion 29
     defaultConfig {
         applicationId "com.madrat.j2me_cheetah"
         minSdkVersion 19
-        targetSdkVersion 28
+        targetSdkVersion 29
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -35,11 +36,11 @@ dependencies {
 
     // Other
     // Moshi
-    def moshiVersion = "1.8.0"
+    def moshiVersion = '1.9.2'
 
     // Kotlin
     // Core-KTX
-    def coreKtxVersion = "1.0.2"
+    def coreKtxVersion = '1.2.0'
     // Coroutines
     def coroutinesVersion = "1.3.0-M1"
 
@@ -53,7 +54,7 @@ dependencies {
 
     // Testing
     // Junit
-    def junitVersion = "4.12"
+    def junitVersion = '4.13'
     // Junit Runner
     def junitRunnerVersion = "1.2.0"
     // Espresso
@@ -62,14 +63,14 @@ dependencies {
 
     // Other
     // Moshi
-    implementation("com.squareup.moshi:moshi:$moshiVersion")
+    implementation("com.squareup.moshi:moshi-kotlin:$moshiVersion")
     // Navigation Architecture Component
     implementation "androidx.navigation:navigation-fragment-ktx:$navigationVersion"
     implementation "androidx.navigation:navigation-ui-ktx:$navigationVersion"
 
     // Kotlin
     // StdLib
-    implementation"org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlinVersion"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlinVersion"
     // Core-KTX
     implementation "androidx.core:core-ktx:$coreKtxVersion"
     // Coroutines
