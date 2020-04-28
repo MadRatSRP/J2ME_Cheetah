@@ -22,7 +22,7 @@ import kotlinx.android.synthetic.main.view_search_of_cheats.view.*
 class SearchOfCheatsView
     : Fragment(), SearchOfCheatsMVP.View {
     private var adapter: SpannableCheatsAdapter? = null
-    private var socPresenter: SearchOfCheatsPresenter? = null
+    private var presenter: SearchOfCheatsPresenter? = null
 
     private val spanHighlight by lazy {
         ForegroundColorSpan(
@@ -32,7 +32,7 @@ class SearchOfCheatsView
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        context?.let { socPresenter?.updateAndShowListOfCheats(it) }
+        context?.let { presenter?.updateAndShowListOfCheats(it) }
 
         socSearchBar.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {}
@@ -59,7 +59,7 @@ class SearchOfCheatsView
     }
 
     override fun setupMVP() {
-        socPresenter = SearchOfCheatsPresenter(this)
+        presenter = SearchOfCheatsPresenter(this)
     }
     override fun updateListOfCheats(listOfCheats: ArrayList<SpannableCheat>) {
         adapter?.updateSpannableListOfCheats(listOfCheats)
@@ -69,9 +69,9 @@ class SearchOfCheatsView
         val cheatName = socSearchBar.text
 
         if (cheatName?.length == 0) {
-            socPresenter?.showListOfCheats()
+            presenter?.showListOfCheats()
         } else {
-            socPresenter?.searchForCheatAndUpdateListOfCheats(cheatName.toString())
+            presenter?.searchForCheatAndUpdateListOfCheats(cheatName.toString())
         }
     }
     private fun highlight() {
